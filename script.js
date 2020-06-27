@@ -1,7 +1,8 @@
 window.onload = initTodoList;
 
 const todoList = JSON.parse(localStorage.getItem("todoList")) || [];
-console.log(todoList);
+const ulElement = document.getElementById("out");
+const inputElement = document.getElementById("in");
 
 function saveTodo() {
   localStorage.setItem("todoList", JSON.stringify(todoList));
@@ -9,18 +10,23 @@ function saveTodo() {
 
 function initTodoList() {
   for (let todo of todoList) {
-    const ulElement = document.getElementById("out");
     // ulElement.append(renderTodo(todo));
     ulElement.prepend(renderTodo(todo));
   }
+
+  inputElement.onkeypress = function (f) {
+    if (f.keyCode === 13) {
+      console.log("Enter");
+      addItem();
+    }
+  };
 }
 
 function addItem() {
-  const todoElement = document.getElementById("in");
-  const value = todoElement.value;
+  const value = inputElement.value;
   const date = new Date();
 
-  if (value != "") {
+  if (value !== "") {
     const todoItem = {
       id: date.getTime(),
       date: date,
@@ -29,10 +35,9 @@ function addItem() {
     };
     todoList.push(todoItem);
 
-    const ulElement = document.getElementById("out");
     ulElement.prepend(renderTodo(todoItem));
 
-    todoElement.value = "";
+    inputElement.value = "";
   }
   saveTodo();
 }
@@ -56,6 +61,7 @@ function checkTodo() {
 }
 
 function deleteTodo() {
+  if (!confirm("Do you really want to delete this todo?")) return;
   const liElm = this.parentElement;
   const id = liElm.dataset.id;
   liElm.remove();
@@ -84,8 +90,8 @@ function renderTodo(todoItem) {
   inputElm.onchange = checkTodo;
   buttonElm.onclick = deleteTodo;
 
-  liElm.append(divElm);
-  liElm.append(inputElm);
   liElm.append(buttonElm);
+  liElm.append(inputElm);
+  liElm.append(divElm);
   return liElm;
 }

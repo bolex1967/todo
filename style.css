@@ -1,9 +1,13 @@
 .checked {
-  color: rgb(173, 173, 173);
-  background-color: gray;
+  color: rgb(190, 190, 190);
+  background-color: rgb(238, 238, 238);
 }
 
 .todo {
-  width: 20%;
+  /* width: 30%; */
   display: inline-block;
+}
+
+li > * {
+  margin: 0 5px;
 }
