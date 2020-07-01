@@ -1,3 +1,7 @@
+input {
+  margin: 15px;
+}
+
 .checked {
   color: rgb(190, 190, 190);
   background-color: rgb(238, 238, 238);
@@ -9,5 +13,35 @@
 }
 
 li > * {
+  /* display: block; */
   margin: 0 5px;
+  padding: 5px;
+  min-height: 30px;
+  font-size: large;
 }
+
+.hide {
+  display: none;
+}
+
+li::before {
+  content: "";
+  /* width: 100%; */
+  height: 1px;
+  /* background: cadetblue; */ */
+  display: block;
+}
+
+li::after {
+  content: "";
+  border: 3px;
+  width: 100%;
+  height: 1px;
+  background: rgb(177, 177, 177);
+  display: block;
+}
+ li:hover {
+   background-color: aquamarine;
+   font-style: inherit;
+   transition: all ease 1s;
+ }
